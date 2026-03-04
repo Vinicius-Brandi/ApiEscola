@@ -28,8 +28,6 @@ namespace ApiEscola.Servicos
                 Mensagens.Add(ServicoMensagem.Erro("Turma não existe"));
                 return false;
             }
-            
-
             return true;
         }
         public Aluno Matricular(Aluno aluno)

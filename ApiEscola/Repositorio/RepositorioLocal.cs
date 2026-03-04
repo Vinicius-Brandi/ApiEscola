@@ -16,12 +16,12 @@ namespace ApiEscola.Repositorio
             _lixo = new List<T>();
         }
 
-        public T Retorna(long id)
+        public virtual T Retorna(long id)
         {
             return _dados.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<T> RetornaTodos()
+        public virtual List<T> RetornaTodos()
         {
             return _dados;
         }

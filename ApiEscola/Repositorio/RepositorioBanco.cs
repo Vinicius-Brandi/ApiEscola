@@ -7,8 +7,8 @@ namespace ApiEscola.Repositorio
 {
     public class RepositorioBanco<T> : IRepositorio<T> where T : EntidadeBase
     {
-        private readonly EscolaContext _context;
-        private readonly DbSet<T> _dbSet;
+        protected readonly EscolaContext _context;
+        protected readonly DbSet<T> _dbSet;
 
         public RepositorioBanco(EscolaContext context)
         {
@@ -16,12 +16,12 @@ namespace ApiEscola.Repositorio
             _dbSet = _context.Set<T>();
         }
 
-        public T Retorna(long id)
+        public virtual T Retorna(long id)
         {
             return _dbSet.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<T> RetornaTodos()
+        public virtual List<T> RetornaTodos()
         {
             return _dbSet.ToList();
         }

@@ -7,7 +7,7 @@ namespace ApiEscola.Servicos
 {
     public class ServicoTurma : ServicoCrud<Turma>, IServicoTurma
     {
-        public ServicoTurma(IRepositorio<Turma> repositorio) : base(repositorio)
+        public ServicoTurma(IRepositorioTurma repositorio) : base(repositorio)
         {
         }
     }

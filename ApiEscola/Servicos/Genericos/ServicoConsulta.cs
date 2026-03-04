@@ -17,12 +17,12 @@ namespace ApiEscola.Servicos.Genericos
             Mensagens = new List<MensagemRetorno>();
         }
 
-        public T Retorna(long id)
+        public virtual T Retorna(long id)
         {
             return _repositorio.Retorna(id);
         }
 
-        public List<T> RetornaTodos()
+        public virtual List<T> RetornaTodos()
         {
             return _repositorio.RetornaTodos();
         }
