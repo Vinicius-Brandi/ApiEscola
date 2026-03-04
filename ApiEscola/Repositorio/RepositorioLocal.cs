@@ -3,7 +3,7 @@ using ApiEscola.Interfaces.Repositorio;
 
 namespace ApiEscola.Repositorio
 {
-    public class RepositorioLocal<T> : IRepositorioLocal<T>
+    public class RepositorioLocal<T> : IRepositorio<T>
         where T : EntidadeBase
     {
         private readonly List<T> _dados;

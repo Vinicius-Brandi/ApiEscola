@@ -7,7 +7,7 @@ namespace ApiEscola.Servicos.Genericos
     public class ServicoCrud<T> : ServicoConsulta<T>, IServicoCrud<T>
         where T : EntidadeBase
     {
-        public ServicoCrud(IRepositorioLocal<T> repositorio) : base(repositorio)
+        public ServicoCrud(IRepositorio<T> repositorio) : base(repositorio)
         {
         }
 

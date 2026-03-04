@@ -8,10 +8,10 @@ namespace ApiEscola.Servicos.Genericos
     public class ServicoConsulta<T> : IServicoConsulta<T>
         where T : EntidadeBase
     {
-        protected readonly IRepositorioLocal<T> _repositorio;
+        protected readonly IRepositorio<T> _repositorio;
         public List<MensagemRetorno> Mensagens { get; protected set; }
 
-        public ServicoConsulta(IRepositorioLocal<T> repositorio)
+        public ServicoConsulta(IRepositorio<T> repositorio)
         {
             _repositorio = repositorio;
             Mensagens = new List<MensagemRetorno>();

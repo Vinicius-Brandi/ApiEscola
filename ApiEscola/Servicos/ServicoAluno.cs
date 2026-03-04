@@ -7,18 +7,28 @@ namespace ApiEscola.Servicos
 {
     public class ServicoAluno : ServicoCrud<Aluno>, IServicoAluno
     {
-        public ServicoAluno(IRepositorioLocal<Aluno> repositorio) : base(repositorio)
+        private readonly ServicoTurma _servicoTurma;
+        public ServicoAluno(IRepositorio<Aluno> repositorio) : base(repositorio)
         {
         }
-        public override bool Valida(Aluno entidade)
+        public override bool Valida(Aluno aluno)
         {
             var alunos = _repositorio.RetornaTodos().ToList();
-            if (alunos.Any(a => a.Email != null && a.Email.Equals(entidade.Email, StringComparison.OrdinalIgnoreCase) && a.Id != entidade.Id))
+            if (alunos.Any(a => a.Email != null && a.Email.Equals(aluno.Email, StringComparison.OrdinalIgnoreCase) && a.Id != aluno.Id))
             {
                 Mensagens.Add(ServicoMensagem.Erro("Já existe um aluno cadastrado com este e-mail."));
                 return false;
             }
-               
+            try
+            {
+                Turma turma = _servicoTurma.Retorna(aluno.TurmaId);
+            }
+            catch
+            {
+                Mensagens.Add(ServicoMensagem.Erro("Turma não existe"));
+                return false;
+            }
+            
 
             return true;
         }

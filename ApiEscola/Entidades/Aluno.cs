@@ -10,5 +10,7 @@ namespace ApiEscola.Entidades
         public string LastName { get; set; }
         [RegularExpression(@"^[^@\s]+@faculdade\.edu$", ErrorMessage = "O e-mail deve terminar com @faculdade.edu.")]
         public string Email { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Aluno precisa ter uma turma")]
+        public long TurmaId { get; set; }
     }
 }
