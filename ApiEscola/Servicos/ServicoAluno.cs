@@ -7,10 +7,13 @@ namespace ApiEscola.Servicos
 {
     public class ServicoAluno : ServicoCrud<Aluno>, IServicoAluno
     {
-        private readonly ServicoTurma _servicoTurma;
-        public ServicoAluno(IRepositorio<Aluno> repositorio) : base(repositorio)
+        private readonly IServicoMatricula _servicoMatricula;
+
+        public ServicoAluno(IRepositorio<Aluno> repositorio, IServicoMatricula servicoMatricula) : base(repositorio)
         {
+            _servicoMatricula = servicoMatricula;
         }
+
         public override bool Valida(Aluno aluno)
         {
             var alunos = _repositorio.RetornaTodos().ToList();
@@ -19,26 +22,42 @@ namespace ApiEscola.Servicos
                 Mensagens.Add(ServicoMensagem.Erro("Já existe um aluno cadastrado com este e-mail."));
                 return false;
             }
-            try
-            {
-                Turma turma = _servicoTurma.Retorna(aluno.TurmaId);
-            }
-            catch
-            {
-                Mensagens.Add(ServicoMensagem.Erro("Turma não existe"));
-                return false;
-            }
             return true;
         }
-        public Aluno Matricular(Aluno aluno)
+
+        public override Aluno Excluir(Aluno entidade)
+        {
+            _servicoMatricula.ExcluirMatriculasDoAluno(entidade.Id);
+            return base.Excluir(entidade);
+        }
+
+        public Matricula Matricular(Matricula matricula)
         {
             Mensagens.Clear();
+            var retorno = _servicoMatricula.Incluir(matricula);
+            if (retorno == null)
+            {
+                foreach (var mensagem in _servicoMatricula.Mensagens)
+                    Mensagens.Add(mensagem);
+            }
+            return retorno;
+        }
 
-            var criado = Incluir(aluno);
-            if(criado != null) 
-                Mensagens.Add(ServicoMensagem.Sucesso("Aluno matriculado com sucesso."));
+        public bool CancelarMatricula(long idAluno, long idTurma)
+        {
+            Mensagens.Clear();
+            var retorno = _servicoMatricula.CancelarMatricula(idAluno, idTurma);
+            if (!retorno)
+            {
+                foreach (var mensagem in _servicoMatricula.Mensagens)
+                    Mensagens.Add(mensagem);
+            }
+            return retorno;
+        }
 
-            return criado;
+        public List<Turma> RetornaTurmasDoAluno(long idAluno)
+        {
+            return _servicoMatricula.RetornaTurmasDoAluno(idAluno);
         }
     }
 }

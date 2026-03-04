@@ -2,7 +2,6 @@ using ApiEscola.Data.Context;
 using ApiEscola.Interfaces.Repositorio;
 using ApiEscola.Interfaces.Servicos;
 using ApiEscola.Repositorio;
-using ApiEscola.Repositorio.ApiEscola.Repositorio;
 using ApiEscola.Servicos;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +17,7 @@ builder.Services.AddSwaggerGen();
 // Injeção de Dependência
 builder.Services.AddTransient<IServicoAluno, ServicoAluno>();
 builder.Services.AddTransient<IServicoTurma, ServicoTurma>();
-builder.Services.AddTransient<ServicoTurma>();
+builder.Services.AddTransient<IServicoMatricula, ServicoMatricula>();
 
 bool usarBanco = builder.Configuration.GetValue<bool>("RepositorioBanco");
 
@@ -29,12 +28,10 @@ builder.Services.AddDbContext<EscolaContext>(options =>
 if (usarBanco)
 {
     builder.Services.AddScoped(typeof(IRepositorio<>), typeof(RepositorioBanco<>));
-    builder.Services.AddScoped<IRepositorioTurma, RepositorioTurmaBanco>();
 }
 else
 {
     builder.Services.AddSingleton(typeof(IRepositorio<>), typeof(RepositorioLocal<>));
-    builder.Services.AddSingleton<IRepositorioTurma, RepositorioTurmaLocal>();
 }
 
 var app = builder.Build();

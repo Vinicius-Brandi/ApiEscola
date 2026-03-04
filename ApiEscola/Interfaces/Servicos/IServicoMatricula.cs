@@ -3,10 +3,12 @@ using ApiEscola.Interfaces.Servicos.Genericos;
 
 namespace ApiEscola.Interfaces.Servicos
 {
-    public interface IServicoAluno : IServicoCrud<Aluno>
+    public interface IServicoMatricula : IServicoCrud<Matricula>
     {
-        Matricula Matricular(Matricula matricula);
         bool CancelarMatricula(long idAluno, long idTurma);
+        List<Aluno> RetornaAlunosDaTurma(long idTurma);
         List<Turma> RetornaTurmasDoAluno(long idAluno);
+        void ExcluirMatriculasDoAluno(long idAluno);
+        void ExcluirMatriculasDaTurma(long idTurma);
     }
 }

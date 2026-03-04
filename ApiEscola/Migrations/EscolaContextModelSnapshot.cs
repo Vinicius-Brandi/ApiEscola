@@ -47,14 +47,38 @@ namespace ApiEscola.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("TurmaId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("ApiEscola.Entidades.Matricula", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataExclui")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("IdAluno")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdTurma")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TurmaId");
+                    b.HasIndex("IdAluno");
 
-                    b.ToTable("Alunos");
+                    b.HasIndex("IdTurma");
+
+                    b.ToTable("Matriculas");
                 });
 
             modelBuilder.Entity("ApiEscola.Entidades.Turma", b =>
@@ -68,6 +92,10 @@ namespace ApiEscola.Migrations
                     b.Property<int>("Ano")
                         .HasColumnType("int");
 
+                    b.Property<string>("Curso")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
@@ -75,6 +103,7 @@ namespace ApiEscola.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Sala")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -82,18 +111,19 @@ namespace ApiEscola.Migrations
                     b.ToTable("Turmas");
                 });
 
-            modelBuilder.Entity("ApiEscola.Entidades.Aluno", b =>
+            modelBuilder.Entity("ApiEscola.Entidades.Matricula", b =>
                 {
-                    b.HasOne("ApiEscola.Entidades.Turma", null)
-                        .WithMany("Alunos")
-                        .HasForeignKey("TurmaId")
+                    b.HasOne("ApiEscola.Entidades.Aluno", null)
+                        .WithMany()
+                        .HasForeignKey("IdAluno")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("ApiEscola.Entidades.Turma", b =>
-                {
-                    b.Navigation("Alunos");
+                    b.HasOne("ApiEscola.Entidades.Turma", null)
+                        .WithMany()
+                        .HasForeignKey("IdTurma")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

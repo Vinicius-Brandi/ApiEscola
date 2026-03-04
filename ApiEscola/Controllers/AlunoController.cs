@@ -32,9 +32,9 @@ namespace ApiEscola.Controllers
         }
 
         [HttpPost]
-        public IActionResult Matricular([FromBody] Aluno aluno)
+        public IActionResult Adicionar([FromBody] Aluno aluno)
         {
-            var criado = _servicoAluno.Matricular(aluno);
+            var criado = _servicoAluno.Incluir(aluno);
             if (criado == null)
                 return BadRequest(_servicoAluno.Mensagens);
 
@@ -46,7 +46,7 @@ namespace ApiEscola.Controllers
         {
             var editado = _servicoAluno.Editar(aluno);
             if (editado == null)
-                return NotFound();
+                return BadRequest(_servicoAluno.Mensagens);
 
             return Ok(editado);
         }
@@ -60,6 +60,40 @@ namespace ApiEscola.Controllers
 
             _servicoAluno.Excluir(aluno);
             return NoContent();
+        }
+
+        // POST /aluno/{idAluno}/matricula
+        [HttpPost("{idAluno}/matricula")]
+        public IActionResult Matricular(long idAluno, [FromBody] long idTurma)
+        {
+            var matricula = new Matricula { IdAluno = idAluno, IdTurma = idTurma };
+            var criado = _servicoAluno.Matricular(matricula);
+            if (criado == null)
+                return BadRequest(_servicoAluno.Mensagens);
+
+            return Created(string.Empty, criado);
+        }
+
+        // DELETE /aluno/{idAluno}/matricula/{idTurma}
+        [HttpDelete("{idAluno}/matricula/{idTurma}")]
+        public IActionResult CancelarMatricula(long idAluno, long idTurma)
+        {
+            var cancelado = _servicoAluno.CancelarMatricula(idAluno, idTurma);
+            if (!cancelado)
+                return BadRequest(_servicoAluno.Mensagens);
+
+            return NoContent();
+        }
+
+        // GET /aluno/{idAluno}/turmas
+        [HttpGet("{idAluno}/turmas")]
+        public IActionResult RetornaTurmasDoAluno(long idAluno)
+        {
+            var aluno = _servicoAluno.Retorna(idAluno);
+            if (aluno == null)
+                return NotFound();
+
+            return Ok(_servicoAluno.RetornaTurmasDoAluno(idAluno));
         }
     }
 }

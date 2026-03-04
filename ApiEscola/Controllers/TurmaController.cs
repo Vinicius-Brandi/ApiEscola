@@ -1,6 +1,5 @@
 ﻿using ApiEscola.Entidades;
 using ApiEscola.Interfaces.Servicos;
-using ApiEscola.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEscola.Controllers
@@ -10,22 +9,24 @@ namespace ApiEscola.Controllers
     public class TurmaController : ControllerBase
     {
         private readonly IServicoTurma _servicoTurma;
+
         public TurmaController(IServicoTurma servicoTurma)
         {
             _servicoTurma = servicoTurma;
         }
+
         [HttpGet("{id}")]
         public IActionResult RetornaTurma(long id)
         {
-            var aluno = _servicoTurma.Retorna(id);
-            if (aluno == null)
+            var turma = _servicoTurma.Retorna(id);
+            if (turma == null)
                 return NotFound();
 
-            return Ok(aluno);
+            return Ok(turma);
         }
 
         [HttpGet]
-        public IActionResult RetornaTurma()
+        public IActionResult RetornaTurmas()
         {
             return Ok(_servicoTurma.RetornaTodos());
         }
@@ -41,11 +42,11 @@ namespace ApiEscola.Controllers
         }
 
         [HttpPut]
-        public IActionResult Editar([FromBody] Turma aluno)
+        public IActionResult Editar([FromBody] Turma turma)
         {
-            var editado = _servicoTurma.Editar(aluno);
+            var editado = _servicoTurma.Editar(turma);
             if (editado == null)
-                return NotFound();
+                return BadRequest(_servicoTurma.Mensagens);
 
             return Ok(editado);
         }
@@ -53,12 +54,23 @@ namespace ApiEscola.Controllers
         [HttpDelete("{id}")]
         public IActionResult Deletar(long id)
         {
-            var aluno = _servicoTurma.Retorna(id);
-            if (aluno == null)
+            var turma = _servicoTurma.Retorna(id);
+            if (turma == null)
                 return NotFound();
 
-            _servicoTurma.Excluir(aluno);
+            _servicoTurma.Excluir(turma);
             return NoContent();
+        }
+
+        // GET /turma/{idTurma}/alunos
+        [HttpGet("{idTurma}/alunos")]
+        public IActionResult RetornaAlunosDaTurma(long idTurma)
+        {
+            var turma = _servicoTurma.Retorna(idTurma);
+            if (turma == null)
+                return NotFound();
+
+            return Ok(_servicoTurma.RetornaAlunosDaTurma(idTurma));
         }
     }
 }

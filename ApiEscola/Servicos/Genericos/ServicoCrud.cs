@@ -24,13 +24,13 @@ namespace ApiEscola.Servicos.Genericos
             return _repositorio.Incluir(entidade);
         }
 
-        public T Excluir(T entidade)
+        public virtual T Excluir(T entidade)
         {
             entidade.DataExclui = DateTime.Now;
             return _repositorio.Excluir(entidade);
         }
 
-        public T Editar(T entidade)
+        public virtual T Editar(T entidade)
         {
             if(!Valida(entidade)) 
                 return null;
