@@ -1,8 +1,8 @@
-using ApiEscola.Data.Context;
-using ApiEscola.Interfaces.Repositorio;
-using ApiEscola.Interfaces.Servicos;
+using ApiEscola.Domain.Interfaces.Repositorio;
+using ApiEscola.Domain.Interfaces.Servicos;
+using ApiEscola.Domain.Servicos;
 using ApiEscola.Repositorio;
-using ApiEscola.Servicos;
+using ApiEscola.Repositorio.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,4 @@
-﻿namespace ApiEscola.ObjetoValor
+﻿namespace ApiEscola.Domain.ObjetoValor
 {
     public class MensagemRetorno
     {

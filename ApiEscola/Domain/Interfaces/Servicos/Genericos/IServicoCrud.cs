@@ -1,6 +1,6 @@
-using ApiEscola.Entidades;
+using ApiEscola.Domain.Entidades;
 
-namespace ApiEscola.Interfaces.Servicos.Genericos
+namespace ApiEscola.Domain.Interfaces.Servicos.Genericos
 {
     public interface IServicoCrud<T> : IServicoConsulta<T> where T : EntidadeBase
     {

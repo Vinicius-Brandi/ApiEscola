@@ -1,7 +1,7 @@
-using ApiEscola.Entidades;
-using ApiEscola.ObjetoValor;
+using ApiEscola.Domain.Entidades;
+using ApiEscola.Domain.ObjetoValor;
 
-namespace ApiEscola.Interfaces.Servicos.Genericos
+namespace ApiEscola.Domain.Interfaces.Servicos.Genericos
 {
     public interface IServicoConsulta<T> where T : EntidadeBase
     {

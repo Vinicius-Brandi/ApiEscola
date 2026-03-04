@@ -1,7 +1,7 @@
-using ApiEscola.Entidades;
-using ApiEscola.Interfaces.Servicos.Genericos;
+using ApiEscola.Domain.Entidades;
+using ApiEscola.Domain.Interfaces.Servicos.Genericos;
 
-namespace ApiEscola.Interfaces.Servicos
+namespace ApiEscola.Domain.Interfaces.Servicos
 {
     public interface IServicoAluno : IServicoCrud<Aluno>
     {

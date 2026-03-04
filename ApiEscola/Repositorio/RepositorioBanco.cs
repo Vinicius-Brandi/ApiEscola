@@ -1,6 +1,6 @@
-﻿using ApiEscola.Data.Context;
-using ApiEscola.Entidades;
-using ApiEscola.Interfaces.Repositorio;
+﻿using ApiEscola.Domain.Entidades;
+using ApiEscola.Domain.Interfaces.Repositorio;
+using ApiEscola.Repositorio.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiEscola.Repositorio

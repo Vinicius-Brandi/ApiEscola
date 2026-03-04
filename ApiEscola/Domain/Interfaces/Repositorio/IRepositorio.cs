@@ -1,6 +1,6 @@
-using ApiEscola.Entidades;
+using ApiEscola.Domain.Entidades;
 
-namespace ApiEscola.Interfaces.Repositorio
+namespace ApiEscola.Domain.Interfaces.Repositorio
 {
     public interface IRepositorio<T>
         where T : EntidadeBase

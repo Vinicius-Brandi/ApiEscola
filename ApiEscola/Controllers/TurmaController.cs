@@ -1,5 +1,5 @@
-﻿using ApiEscola.Entidades;
-using ApiEscola.Interfaces.Servicos;
+﻿using ApiEscola.Domain.Entidades;
+using ApiEscola.Domain.Interfaces.Servicos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEscola.Controllers

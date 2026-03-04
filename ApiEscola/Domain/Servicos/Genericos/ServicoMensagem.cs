@@ -1,6 +1,6 @@
-using ApiEscola.ObjetoValor;
+using ApiEscola.Domain.ObjetoValor;
 
-namespace ApiEscola.Servicos.Genericos
+namespace ApiEscola.Domain.Servicos.Genericos
 {
     public static class ServicoMensagem
     {

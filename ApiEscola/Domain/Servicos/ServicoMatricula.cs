@@ -1,9 +1,9 @@
-﻿using ApiEscola.Entidades;
-using ApiEscola.Interfaces.Repositorio;
-using ApiEscola.Interfaces.Servicos;
-using ApiEscola.Servicos.Genericos;
+﻿using ApiEscola.Domain.Entidades;
+using ApiEscola.Domain.Interfaces.Repositorio;
+using ApiEscola.Domain.Interfaces.Servicos;
+using ApiEscola.Domain.Servicos.Genericos;
 
-namespace ApiEscola.Servicos
+namespace ApiEscola.Domain.Servicos
 {
     public class ServicoMatricula : ServicoCrud<Matricula>, IServicoMatricula
     {

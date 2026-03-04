@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApiEscola.Entidades
+namespace ApiEscola.Domain.Entidades
 {
     public class Matricula : EntidadeBase
     {

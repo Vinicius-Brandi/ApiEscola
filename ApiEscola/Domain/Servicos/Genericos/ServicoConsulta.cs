@@ -1,9 +1,9 @@
-using ApiEscola.Entidades;
-using ApiEscola.Interfaces.Repositorio;
-using ApiEscola.Interfaces.Servicos.Genericos;
-using ApiEscola.ObjetoValor;
+using ApiEscola.Domain.Entidades;
+using ApiEscola.Domain.Interfaces.Repositorio;
+using ApiEscola.Domain.Interfaces.Servicos.Genericos;
+using ApiEscola.Domain.ObjetoValor;
 
-namespace ApiEscola.Servicos.Genericos
+namespace ApiEscola.Domain.Servicos.Genericos
 {
     public class ServicoConsulta<T> : IServicoConsulta<T>
         where T : EntidadeBase
